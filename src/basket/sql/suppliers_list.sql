@@ -1,0 +1,1 @@
+SELECT seller_id, Seller_name FROM sklad.seller_contract

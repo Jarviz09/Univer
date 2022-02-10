@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор поставщика</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .field_one, Back {
+            width: 200px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            text-align: center;
+            transform: translateY(20%);
+            font-family: "Times New Roman";
+            display: flex;
+            flex-direction: column;
+        }
+
+        .seller {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light" style="background-color: #0099FF; height:50px;">
+  <!-- Navbar content -->
+    <p style="margin-left: 10px;"><font size="5"; color="white">Информационная система «Склад»</font></p>
+
+    {% if session['group_name'] == guest %}
+        <p style="text-align:right; margin-right: 10px;"><font size="3"; color="white">Вы не авторизовались</font></p>
+    {% else %}
+        <p style="text-align:right; margin-right: 10px;"><font size="3"; color="white">Вы авторизованы как {{session['group_name']}}</font></p>
+    {% endif %}
+
+
+</nav>
+
+<div class="container">
+
+
+    <form class="seller" method="post" action="">
+
+    <div class="field_one">
+        <label for="exampleFormControlInput1" class="form-label">Выберите поставщика</label>
+        <select class="form-select" id="exampleFormControlInput1" name="name">
+            {% for i in result: %}
+            <option value="{{i['seller_id']}}"> {{i['Seller_name']}} </option>
+            {% endfor %}
+        </select>
+
+    </div>
+
+
+    <button type="submit" class="btn btn-success" >Перейти к оформлению</button>
+
+    </form>
+
+    <a type="submit" class="btn btn-dark" style="margin-top: 10px; width:150px; text-align:center; margin: 0 auto" href="{{ url_for('menu') }}">В главное меню</a>
+
+</div>
+
+</body>
+</html>

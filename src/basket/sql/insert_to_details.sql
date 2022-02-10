@@ -1,0 +1,1 @@
+INSERT INTO sklad.details (amount, Fix_Date, S_COSTUNIT, Product_id) VALUES ('$amount', CURRENT_DATE, '$Price', '$product_id')

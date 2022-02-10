@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Главное меню</title>
+    <style>
+        div.buttons {
+            width: 350px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .buttons > a {
+            font-size: 1em;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-family: 'Times New Roman';
+        }
+
+        p {
+            font-family: 'Calibri';
+        }
+
+        div.titul {
+            position: relative;
+        }
+
+        .container {
+            width: 500px;
+            top: 30%;
+            transform: translateY(50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light" style="background-color: #0099FF; height:50px;">
+  <!-- Navbar content -->
+    <p style="margin-left: 10px;"><font size="5"; color="white">Информационная система «Склад»</font></p>
+
+    {% if session['group_name'] == guest %}
+        <p style="text-align:right; margin-right: 10px;"><font size="3"; color="white">Вы не авторизовались</font></p>
+    {% else %}
+        <p style="text-align:right; margin-right: 10px;"><font size="3"; color="white">Вы авторизованы как {{session['group_name']}}</font></p>
+    {% endif %}
+
+
+</nav>
+
+<div class="container">
+
+    {% if session['group_name']: %}
+        <div class="titul">
+            <div class="title">Добро пожаловать, {{session['group_name']}}!</div>
+            <p>Мы рады приветствовать вас на платформе склада</p>
+        </div>
+    {% else %}
+        <div class="titul">
+            <div class="title">Добро пожаловать, guest!</div>
+            <p>Мы рады приветствовать вас на платформе склада</p>
+        </div>
+    {% endif %}
+
+<!--        <div class="titul">-->
+<!--            <div class="title">Добро пожаловать!</div>-->
+<!--            <p>Мы рады приветствовать вас на платформе склада</p>-->
+<!--        </div>-->
+
+    <div class="buttons">
+        {% if func.group_permission_validation('requests.request_menu') %}
+            <a type="submit" class="btn btn-primary" style="margin-bottom: 10px" href="{{ url_for('requests.request_menu') }}">Меню
+                запросов</a>
+        {% endif %}
+
+        {% if func.group_permission_validation('auth.login_page') %}
+            <a type="submit" class="btn btn-primary" style="margin-bottom: 10px" href="{{ url_for('auth.login_page') }}">Авторизация</a>
+        {% endif %}
+
+        {% if func.group_permission_validation('basket.choose_supplier') %}
+            <a type="submit" class="btn btn-primary" style="margin-bottom: 10px" href="{{ url_for('basket.choose_supplier') }}">Оформление поставки</a>
+        {% endif %}
+
+        <a type="submit" class="btn btn-primary" style="margin-bottom: 10px" href="{{ url_for('exit') }}">Выход</a>
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+INSERT INTO sklad.supply_product (supply_id, Product_id, S_Unit, S_Count) VALUES ('$supply_id', '$product_id', '$S_Unit', '$S_Count')

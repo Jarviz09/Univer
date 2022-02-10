@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basket</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <style>
+
+
+        .heading{
+            display: block;
+            font-size: 35px;
+            font-weight: 700;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 10px;
+        }
+
+        .usual{
+            font-size: 25px;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+{% import 'basket_utils.html' as utils %}
+
+<nav class="navbar navbar-light" style="background-color: #0099FF; height:50px;">
+  <!-- Navbar content -->
+    <p style="margin-left: 10px;"><font size="5"; color="white">Информационная система «Склад»</font></p>
+
+    {% if session['group_name'] == guest %}
+        <p style="text-align:right; margin-right: 10px;"><font size="3"; color="white">Вы не авторизовались</font></p>
+    {% else %}
+        <p style="text-align:right; margin-right: 10px;"><font size="3"; color="white">Вы авторизованы как {{session['group_name']}}</font></p>
+    {% endif %}
+
+
+</nav>
+
+<div class="container">
+    {% if session['seller'] %}
+        <p style="font-size: 20px; margin-top:3px;">Поставщик: {{session.get('seller')[0]['Seller_name']}}</p>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-5">
+            <span class="heading"><font face="Times New Roman" color="#000000">Товары поставщика</font></span>
+            {% if items %}
+            {% for item in items %}
+                {{ utils.render_item(item, show_form=True) }}
+            {% endfor %}
+            {% else %}
+            <span class="heading"><font face="Times New Roman" color="#003300">Нет доступных товаров</font></span>
+            {% endif %}
+        </div>
+        <div class="col-sm-5">
+            <span class="heading"><font face="Times New Roman" color="#000000">Ваша корзина</font></span>
+            {% if basket %}
+            {% for item in basket %}
+                {{ utils.render_item(item, show_form=False) }}
+            {% endfor %}
+            {% else %}
+            <span class="usual"><font face="Times New Roman" color="#003300">Корзина пуста</font></span>
+            {% endif %}
+        </div>
+        <div class="col-sm-2" >
+            <div class="btn-group-vertical" >
+                <a type="submit" class="btn btn-secondary" style="margin-bottom: 10px; margin-top: 20px; text-align:center" href=" {{ url_for('basket.clear_basket_handler') }}">Очистить корзину</a>
+            <a type="submit" class="btn btn-success" style="margin-bottom: 10px; text-align:center" href=" {{ url_for('basket.buy_handler') }}">Оформить</a>
+            <a type="submit" class="btn btn-dark" style="margin-bottom: 10px; text-align:center" href=" {{ url_for('basket.to_menu') }}">Вернуться в главное меню</a>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+
+</html>

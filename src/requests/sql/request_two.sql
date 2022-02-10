@@ -1,0 +1,1 @@
+SELECT distinct(Product_id), Product_name, Seller_name from (sklad.product join (SELECT s.Supply_id, s.S_Date, product_id, seller_id from supply s join supply_product p on s.Supply_id = p.supply_id) t using(product_id)) join sklad.seller_contract using(seller_id) WHERE Seller_name = '$name' and year(S_Date) = '$year'

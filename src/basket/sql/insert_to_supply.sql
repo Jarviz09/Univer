@@ -1,0 +1,1 @@
+INSERT INTO sklad.supply (S_Date, seller_id) VALUES (CURRENT_DATE , '$seller_id')

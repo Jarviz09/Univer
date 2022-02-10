@@ -1,0 +1,1 @@
+SELECT * from sklad.product where Product_id='$product_id';

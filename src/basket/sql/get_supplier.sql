@@ -1,0 +1,1 @@
+select seller_id, Seller_name from sklad.seller_contract where seller_id = '$seller_id'

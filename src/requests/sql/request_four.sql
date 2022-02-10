@@ -1,0 +1,2 @@
+SELECT Product_name from sklad.product p left join (SELECT s.*, product_id from sklad.supply s join supply_product using(supply_id) where year(S_Date) = '$year') s on s.Product_id = p.Product_id
+where Supply_id is NULL

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню запросов</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        div.buttons {
+            width: 550px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        h2 {
+            font-family: "Times New Roman";
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 600px;
+            top: 30%;
+            transform: translateY(20%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light" style="background-color: #0099FF; height:50px;">
+  <!-- Navbar content -->
+    <p style="margin-left: 10px;"><font size="5"; color="white">Информационная система «Склад»</font></p>
+
+    {% if session['group_name'] == guest %}
+        <p style="text-align:right; margin-right: 10px;"><font size="3"; color="white">Вы не авторизовались</font></p>
+    {% else %}
+        <p style="text-align:right; margin-right: 10px;"><font size="3"; color="white">Вы авторизованы как {{session['group_name']}}</font></p>
+    {% endif %}
+
+
+</nav>
+
+
+<div class="container">
+    <h2>Выберите, пожалуйста, услугу</h2>
+    <div class="buttons">
+        <a type="submit" class="btn btn-primary" style="margin-bottom: 10px; text-align: left; font-family: 'Times New Roman'" href="{{ url_for('requests.first') }}">Показать отчет о запасах товара XXX на складе</a>
+        <a type="submit" class="btn btn-primary" style="margin-bottom: 10px; text-align: left; font-family: 'Times New Roman'" href="{{ url_for('requests.second') }}">Показать шифры и названия товаров, которые поставщик XXX поставил в XXX году</a>
+        <a type="submit" class="btn btn-primary" style="margin-bottom: 10px; text-align: left; font-family: 'Times New Roman'" href="{{ url_for('requests.third') }}">Показать поставщика самого дешевого товара с названием XXX</a>
+        <a type="submit" class="btn btn-primary" style="margin-bottom: 10px; text-align: left; font-family: 'Times New Roman'" href="{{ url_for('requests.fourth') }}">Показать название товара, который ни разу не поставлялся в XXX году</a>
+        <a type="submit" class="btn btn-primary" style="margin-bottom: 10px; font-family: 'Times New Roman'" href="{{ url_for('menu') }}">Выход в главное меню</a>
+    </div>
+
+
+    </div>
+
+</body>
+</html>
